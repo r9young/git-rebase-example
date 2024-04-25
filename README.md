@@ -27,5 +27,32 @@ your working directory.
 I have a tutorial on [setting up a better terminal on macOS](https://davidboothe.com/a-better-terminal-on-mac-os/)
 - **On Linux**, your life is terminal (and i don't mean ending, HAHA) so pick your own option.
 
+## Delete an Unwanted Commit
+Say you have a commit deeper in your commit history that you really don't want to push up
+to everyone else working on your code base. You can use ```git rebase -i``` to alter 
+the commit history and remove the unwanted commit before creating a PR.
+
+### Identify the commit that we want to remove
+Use the following command and look for the comment about adding azure credentials
+```bash
+git log -v
+```
+[insert picture here]
+
+Now grab the hash of the commit AFTER the one we want to remove. 
+You shouldn't need the whole thing, but the hash you are looking for should be
+`3248590cd963d04618f734383c6d98db2a177132`
+
+### Rebase Interactively
+Add this hash to our rebase command
+
+```bash
+git rebase -i 3248590cd963d04618f734383c6d98db2a177132
+```
+
+
+
+## Squash / Combine Multiple Commits
+
 ## Edit An Old Commit Message
 
