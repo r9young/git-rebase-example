@@ -46,7 +46,9 @@ Use the following command and look for the comment about adding azure credential
 ```bash
 git log -v
 ```
-[insert picture here]
+You can use your up and down arrows to scroll.
+
+![bad-commit.png](images/bad-commit.png)
 
 Now grab the hash of the commit AFTER the one we want to remove. 
 You shouldn't need the whole thing, but the hash you are looking for should be
@@ -56,7 +58,7 @@ You shouldn't need the whole thing, but the hash you are looking for should be
 Add this hash to our rebase command
 
 ```bash
-git rebase -i 3248590cd963d04618f734383c6d98db2a177132
+git rebase -i 3248590cd
 ```
 Git should prompt you with the default git editor. [I've made mine VS Code](https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git)
 
@@ -91,7 +93,7 @@ take the hash from the commit after it. That hash should be `6ccd40e1ee9228131fe
 Now that we found the window we want, let's `rebase` back to that starting commit.
 
 ```bash
-git rebase -i 6ccd40e1ee9228131fe8f0150a2e994347bbca1d 
+git rebase -i 6ccd40e1ee 
 ```
 
 [use image here]
@@ -100,7 +102,12 @@ here we will use the `squash` command, which will combine the marked commit with
 the line directly above. Remember, the order is reversed, so the previous commit
 is above.
 
-Go ahead and squash some of the commits dealing with the readme file
+![rebase-squash.png](images/rebase-squash.png)
+
+Go ahead and squash some of the commits dealing with the readme file and save your changes. Once
+you exit the editor it will bring up another editor to allow you to alter the squashed commits messages.
+
+![squash-comments.png](images/squah-comments.png)
 
 ## Edit An Old Commit Message
 Now say you squashed some commits, but now the message isn't exactly what you want.
@@ -116,16 +123,16 @@ This will open an editor with the last 3 commits
 Use the `reword` command on one of these commits. You may be tempted to change the
 commit message right here, but part is only meant for actions we wish to take.
 
-[INSERT IMAGE HERE]
+![rebase-reword .png](images/rebase-reword.png)
 
 Click save and close your editor. You will then be met with another editor that
 will actually let you change the commit message.
 
-[INSERT IMAGE HERE]
+![reword-commit.png](images/reword-commit.png)
 
 After you've saved and closed this new window, you can review your logs to see
 that the message has indeed changed.
 
-##Conclusion
+## Conclusion
 And with that you've just scratched the surface using `git rebase`. Hopefully you
 find these commands useful for when you want to alter your git history before a PR.
