@@ -50,7 +50,16 @@ Add this hash to our rebase command
 git rebase -i 3248590cd963d04618f734383c6d98db2a177132
 ```
 
+Git should prompt you with the default git editor. [I've made mine VS Code](https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git)
 
+![rebase-drop.png](images/rebase-drop.png)
+
+You'll notice that it gives a big help section to help you determine how to use the 
+interactive rebase command. For this scenario, we will use `drop` on the azure credential
+commit that we want to remove.
+
+Save the changes, check your git log again. You should notice the offending commit
+and it's file changes are gone completely. 
 
 ## Squash / Combine Multiple Commits
 
