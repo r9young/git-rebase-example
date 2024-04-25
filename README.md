@@ -1,8 +1,8 @@
 # Git Rebase Interactive Tutorial
 This is an interactive tutorial on how to use the ```git rebase -i``` command to do the following:
-- edit an old commit message
 - delete an unwanted commit
 - squash/combine multiple commits
+- edit an old commit message
 
 ## Warning about Git Rebase
 ```git rebase``` is a "destructive" command. While old commits can be found in the reflog, 
@@ -23,7 +23,8 @@ Once you have the repository cloned to your local machine, you will need to open
 your working directory.
 
 - **On Windows**, I recommend ```Terminal``` using ```Powershell```. This comes out of the box with Windows 10+.
-- **On Mac**, I recommend [iTerm2](https://iterm2.com/) 
+- **On Mac**, I recommend [iTerm2](https://iterm2.com/). 
+I have a tutorial on [setting up a better terminal on macOS](https://davidboothe.com/a-better-terminal-on-mac-os/)
 - **On Linux**, your life is terminal (and i don't mean ending, HAHA) so pick your own option.
 
 ## Edit An Old Commit Message
