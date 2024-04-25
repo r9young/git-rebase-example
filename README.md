@@ -27,6 +27,15 @@ your working directory.
 I have a tutorial on [setting up a better terminal on macOS](https://davidboothe.com/a-better-terminal-on-mac-os/)
 - **On Linux**, your life is terminal (and i don't mean ending, HAHA) so pick your own option.
 
+## Git Rebase General Tips
+- Commits will be listed in reverse order. The oldest commit starts at the top.
+- `git rebase` will open your default text editor as specified in your git settings. 
+  [You can change this to something like VS Code if you want](https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git).
+- You can use a commit hash or `HEAD~#` notation, where # is the number of commits from HEAD
+  - example: `HEAD~3` would be the top 3 commits
+- If you run into conflicts you can use `git rebase --abort` or `git rebase --continue`
+  like you would with a the `merge` command.
+
 ## Delete an Unwanted Commit
 Say you have a commit deeper in your commit history that you really don't want to push up
 to everyone else working on your code base. You can use ```git rebase -i``` to alter 
@@ -49,7 +58,6 @@ Add this hash to our rebase command
 ```bash
 git rebase -i 3248590cd963d04618f734383c6d98db2a177132
 ```
-
 Git should prompt you with the default git editor. [I've made mine VS Code](https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git)
 
 ![rebase-drop.png](images/rebase-drop.png)
@@ -62,6 +70,62 @@ Save the changes, check your git log again. You should notice the offending comm
 and it's file changes are gone completely. 
 
 ## Squash / Combine Multiple Commits
+Now let's say you were writing this wonderful tutorial and you committed your work
+several times through out the day. But now you want to squash all the random commits
+to be a single commit that represents the unit of work better.
+
+### Identify all the commits to squash
+Before we can squash commits, we need to identify a window of commits that we want to 
+squash. Let's use the log to review our commits.
+
+```bash
+git log -v
+```
+
+Let's go down to the commit with the comment `Add getting started section to README.md`
+
+We've identified the commit we want, but just like when deleting a commit we need to
+take the hash from the commit after it. That hash should be `6ccd40e1ee9228131fe8f0150a2e994347bbca1d`
+
+### Rebase Interactively
+Now that we found the window we want, let's `rebase` back to that starting commit.
+
+```bash
+git rebase -i 6ccd40e1ee9228131fe8f0150a2e994347bbca1d 
+```
+
+[use image here]
+
+here we will use the `squash` command, which will combine the marked commit with 
+the line directly above. Remember, the order is reversed, so the previous commit
+is above.
+
+Go ahead and squash some of the commits dealing with the readme file
 
 ## Edit An Old Commit Message
+Now say you squashed some commits, but now the message isn't exactly what you want.
+This is easy. Let's use the `rebase` command again, but this time we will use the 
+`HEAD~#` notation.
 
+```bash
+git rebase -i HEAD~3
+```
+
+This will open an editor with the last 3 commits
+
+Use the `reword` command on one of these commits. You may be tempted to change the
+commit message right here, but part is only meant for actions we wish to take.
+
+[INSERT IMAGE HERE]
+
+Click save and close your editor. You will then be met with another editor that
+will actually let you change the commit message.
+
+[INSERT IMAGE HERE]
+
+After you've saved and closed this new window, you can review your logs to see
+that the message has indeed changed.
+
+##Conclusion
+And with that you've just scratched the surface using `git rebase`. Hopefully you
+find these commands useful for when you want to alter your git history before a PR.
